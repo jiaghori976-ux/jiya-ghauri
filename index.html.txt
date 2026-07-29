@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Jiya Collection — Elegance Woven in Every Thread</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ---------- RESET & BASE ---------- */
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #2b2b2b;
+  background: #FFF8E7;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+h1,h2,h3,h4 { font-family: 'Playfair Display', serif; color:#800020; }
+a { text-decoration:none; color:inherit; }
+img { max-width:100%; display:block; }
+
+:root {
+  --maroon:#800020;
+  --gold:#D4AF37;
+  --cream:#FFF8E7;
+  --rose:#f4c2c2;
+  --dark:#2b2b2b;
+}
+
+/* ---------- NAVBAR ---------- */
+.navbar {
+  position: fixed; top:0; left:0; width:100%;
+  display:flex; justify-content:space-between; align-items:center;
+  padding: 18px 8%;
+  background: rgba(255,248,231,0.95);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  box-shadow: 0 2px 15px rgba(128,0,32,0.08);
+  transition: padding 0.3s ease;
+}
+.navbar.scrolled { padding: 10px 8%; }
+.logo {
+  font-family:'Playfair Display', serif;
+  font-size: 1.8rem; font-weight:900;
+  color: var(--maroon);
+  letter-spacing: 1px;
+}
+.logo span { color: var(--gold); }
+.nav-links { display:flex; gap: 35px; list-style:none; }
+.nav-links a {
+  font-weight:500; font-size:0.95rem;
+  position:relative; transition: color 0.3s;
+}
+.nav-links a::after {
+  content:''; position:absolute; left:0; bottom:-5px;
+  width:0; height:2px; background: var(--gold);
+  transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--maroon); }
+.nav-links a:hover::after { width:100%; }
+.cart-icon { font-size:1.3rem; cursor:pointer; color: var(--maroon); }
+.hamburger { display:none; font-size:1.6rem; cursor:pointer; color:var(--maroon); }
+
+/* ---------- HERO ---------- */
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(135deg, rgba(128,0,32,0.85), rgba(212,175,55,0.6)),
+              url('https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=1600') center/cover;
+  display:flex; align-items:center; justify-content:center;
+  text-align:center; color: #fff;
+  padding: 0 20px;
+}
+.hero-content h1 {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  color:#fff; margin-bottom:20px;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+  animation: fadeUp 1.2s ease;
+}
+.hero-content p {
+  font-size: 1.2rem; max-width:600px; margin:0 auto 30px;
+  font-weight:300; letter-spacing:1px;
+  animation: fadeUp 1.4s ease;
+}
+.btn {
+  display:inline-block; padding: 14px 40px;
+  background: var(--gold); color: var(--maroon);
+  font-weight:600; letter-spacing:1px;
+  border:2px solid var(--gold); border-radius:50px;
+  cursor:pointer; transition: all 0.3s;
+  animation: fadeUp 1.6s ease;
+}
+.btn:hover { background: transparent; color:#fff; border-color:#fff; transform: translateY(-3px); }
+
+/* ---------- SECTIONS ---------- */
+section { padding: 90px 8%; }
+.section-title {
+  text-align:center; font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+.section-subtitle {
+  text-align:center; color:#888;
+  margin-bottom: 50px; font-style:italic;
+}
+
+/* ---------- COLLECTIONS ---------- */
+.collections-grid {
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+.collection-card {
+  position:relative; height:320px; border-radius:15px;
+  overflow:hidden; cursor:pointer;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transition: transform 0.4s;
+}
+.collection-card:hover { transform: translateY(-10px); }
+.collection-card img {
+  width:100%; height:100%; object-fit:cover;
+  transition: transform 0.6s;
+}
+.collection-card:hover img { transform: scale(1.1); }
+.collection-card .overlay {
+  position:absolute; inset:0;
+  background: linear-gradient(to top, rgba(128,0,32,0.85), transparent 60%);
+  display:flex; align-items:flex-end; justify-content:center;
+  padding:25px; color:#fff;
+}
+.collection-card h3 { color:#fff; font-size:1.6rem; }
+
+/* ---------- PRODUCTS ---------- */
+.filter-tabs {
+  display:flex; justify-content:center; gap:15px;
+  margin-bottom:40px; flex-wrap:wrap;
+}
+.filter-btn {
+  padding: 8px 22px; border:1px solid var(--maroon);
+  background: transparent; color: var(--maroon);
+  border-radius:50px; cursor:pointer; font-weight:500;
+  transition: all 0.3s;
+}
+.filter-btn.active, .filter-btn:hover {
+  background: var(--maroon); color:#fff;
+}
+.products-grid {
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 30px;
+}
+.product-card {
+  background:#fff; border-radius:15px; overflow:hidden;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(128,0,32,0.15);
+}
+.product-img { height:280px; overflow:hidden; }
+.product-img img {
+  width:100%; height:100%; object-fit:cover;
+  transition: transform 0.5s;
+}
+.product-card:hover .product-img img { transform: scale(1.08); }
+.product-info { padding: 20px; text-align:center; }
+.product-info h4 { font-size:1.2rem; margin-bottom:8px; }
+.product-info .price { color: var(--gold); font-weight:600; font-size:1.1rem; }
+.product-info button {
+  margin-top:12px; padding:8px 20px;
+  background: var(--maroon); color:#fff;
+  border:none; border-radius:25px; cursor:pointer;
+  transition: background 0.3s;
+}
+.product-info button:hover { background: var(--gold); color: var(--maroon); }
+
+/* ---------- ABOUT ---------- */
+.about {
+  background: linear-gradient(135deg, #fff 50%, var(--cream) 50%);
+}
+.about-container {
+  display:grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items:center;
+}
+.about-img {
+  border-radius:15px; overflow:hidden;
+  box-shadow: 0 15px 40px rgba(128,0,32,0.2);
+}
+.about-text h2 { font-size: 2.5rem; margin-bottom:20px; }
+.about-text p { margin-bottom:15px; color:#555; }
+
+/* ---------- TESTIMONIALS ---------- */
+.testimonials { background: var(--maroon); color:#fff; text-align:center; }
+.testimonials h2 { color:#fff; }
+.testimonial-slider {
+  max-width:700px; margin: 0 auto;
+  position:relative; min-height:180px;
+}
+.testimonial {
+  display:none; animation: fadeIn 0.8s ease;
+}
+.testimonial.active { display:block; }
+.testimonial p {
+  font-size:1.15rem; font-style:italic;
+  margin-bottom:20px; line-height:1.8;
+}
+.testimonial h4 { color: var(--gold); }
+.dots { margin-top:20px; }
+.dot {
+  display:inline-block; width:12px; height:12px;
+  border-radius:50%; background: rgba(255,255,255,0.4);
+  margin: 0 5px; cursor:pointer; transition: background 0.3s;
+}
+.dot.active { background: var(--gold); }
+
+/* ---------- NEWSLETTER ---------- */
+.newsletter {
+  background: var(--cream); text-align:center;
+}
+.newsletter form {
+  max-width:500px; margin: 0 auto;
+  display:flex; gap:10px; flex-wrap:wrap; justify-content:center;
+}
+.newsletter input {
+  flex:1; min-width:220px; padding:14px 20px;
+  border:1px solid #ddd; border-radius:50px;
+  font-family:inherit; outline:none;
+}
+.newsletter input:focus { border-color: var(--gold); }
+.newsletter button {
+  padding:14px 30px; background: var(--maroon); color:#fff;
+  border:none; border-radius:50px; cursor:pointer; font-weight:600;
+  transition: background 0.3s;
+}
+.newsletter button:hover { background: var(--gold); color: var(--maroon); }
+#formMsg { margin-top:15px; color: var(--maroon); font-weight:500; }
+
+/* ---------- FOOTER ---------- */
+footer {
+  background: #1a0008; color:#ccc; padding: 50px 8% 20px;
+}
+.footer-grid {
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 40px; margin-bottom:30px;
+}
+.footer-grid h4 { color: var(--gold); margin-bottom:15px; }
+.footer-grid a { display:block; margin-bottom:8px; transition: color 0.3s; }
+.footer-grid a:hover { color: var(--gold); }
+.socials { display:flex; gap:15px; margin-top:10px; }
+.socials a {
+  width:38px; height:38px; border-radius:50%;
+  background: var(--maroon); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  transition: background 0.3s;
+}
+.socials a:hover { background: var(--gold); color: var(--maroon); }
+.copyright {
+  text-align:center; padding-top:20px;
+  border-top:1px solid #333; font-size:0.9rem;
+}
+
+/* ---------- ANIMATIONS ---------- */
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(30px); }
+  to { opacity:1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity:0; } to { opacity:1; }
+}
+.reveal { opacity:0; transform: translateY(40px); transition: all 0.8s ease; }
+.reveal.visible { opacity:1; transform: translateY(0); }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+  .nav-links {
+    position: fixed; top:65px; right:-100%;
+    flex-direction:column; background: var(--cream);
+    width:70%; height:100vh; padding:40px 30px;
+    transition: right 0.4s; box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+  }
+  .nav-links.open { right:0; }
+  .hamburger { display:block; }
+  .about-container { grid-template-columns: 1fr; }
+  section { padding: 60px 5%; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="logo">Jiya<span>.</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#collections">Collections</a></li>
+    <li><a href="#products">Shop</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="cart-icon">🛍️</div>
+  <div class="hamburger" id="hamburger">☰</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1>Elegance Woven<br>in Every Thread</h1>
+    <p>Discover timeless Indian heritage — handcrafted sarees, lehengas & jewelry for the modern queen.</p>
+    <a href="#collections" class="btn">Explore Collection</a>
+  </div>
+</section>
+
+<!-- COLLECTIONS -->
+<section id="collections" class="reveal">
+  <h2 class="section-title">Our Collections</h2>
+  <p class="section-subtitle">Curated categories for every celebration</p>
+  <div class="collections-grid">
+    <div class="collection-card">
+      <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600" alt="Sarees">
+      <div class="overlay"><h3>Sarees</h3></div>
+    </div>
+    <div class="collection-card">
+      <img src="https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=600" alt="Lehengas">
+      <div class="overlay"><h3>Lehengas</h3></div>
+    </div>
+    <div class="collection-card">
+      <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600" alt="Jewelry">
+      <div class="overlay"><h3>Jewelry</h3></div>
+    </div>
+    <div class="collection-card">
+      <img src="https://images.unsplash.com/photo-1583391733981-8498408d4b44?w=600" alt="Kurtas">
+      <div class="overlay"><h3>Kurtas</h3></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products" class="reveal">
+  <h2 class="section-title">New Arrivals</h2>
+  <p class="section-subtitle">Freshly crafted, just for you</p>
+  <div class="filter-tabs">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="saree">Sarees</button>
+    <button class="filter-btn" data-filter="lehenga">Lehengas</button>
+    <button class="filter-btn" data-filter="jewelry">Jewelry</button>
+  </div>
+  <div class="products-grid" id="productsGrid">
+    <div class="product-card" data-category="saree">
+      <div class="product-img"><img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=500" alt=""></div>
+      <div class="product-info"><h4>Royal Banarasi</h4><p class="price">₹12,999</p><button>Add to Cart</button></div>
+    </div>
+    <div class="product-card" data-category="lehenga">
+      <div class="product-img"><img src="https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=500" alt=""></div>
+      <div class="product-info"><h4>Bridal Lehenga</h4><p class="price">₹24,500</p><button>Add to Cart</button></div>
+    </div>
+    <div class="product-card" data-category="jewelry">
+      <div class="product-img"><img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500" alt=""></div>
+      <div class="product-info"><h4>Kundan Set</h4><p class="price">₹8,750</p><button>Add to Cart</button></div>
+    </div>
+    <div class="product-card" data-category="saree">
+      <div class="product-img"><img src="https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=500" alt=""></div>
+      <div class="product-info"><h4>Silk Kanjivaram</h4><p class="price">₹15,200</p><button>Add to Cart</button></div>
+    </div>
+    <div class="product-card" data-category="lehenga">
+      <div class="product-img"><img src="https://images.unsplash.com/photo-1610030006870-d1e4ba6662c7?w=500" alt=""></div>
+      <div class="product-info"><h4>Pastel Lehenga</h4><p class="price">₹18,999</p><button>Add to Cart</button></div>
+    </div>
+    <div class="product-card" data-category="jewelry">
+      <div class="product-img"><img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500" alt=""></div>
+      <div class="product-info"><h4>Polki Necklace</h4><p class="price">₹11,400</p><button>Add to Cart</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about reveal">
+  <div class="about-container">
+    <div class="about-img">
+      <img src="https://images.unsplash.com/photo-1583391733975-0c3b218d8a25?w=800" alt="Craftsmanship">
+    </div>
+    <div class="about-text">
+      <h2>Our Story</h2>
+      <p>Jiya Collection was born from a love for India's rich textile heritage. Every piece in our collection is a tribute to the artisans who pour their soul into every stitch, every bead, every thread.</p>
+      <p>We work directly with master weavers and craftsmen across Varanasi, Jaipur, and Kanchipuram to bring you authentic, handcrafted luxury — designed for the modern woman who honors her roots.</p>
+      <a href="#contact" class="btn">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials reveal">
+  <h2 class="section-title">What Our Queens Say</h2>
+  <div class="testimonial-slider">
+    <div class="testimonial active">
+      <p>"The Banarasi saree I ordered was breathtaking. The craftsmanship is unmatched — I felt like royalty on my wedding day!"</p>
+      <h4>— Priya Sharma</h4>
+    </div>
+    <div class="testimonial">
+      <p>"Jiya Collection understands elegance. Every piece tells a story. Their customer service is as warm as their products."</p>
+      <h4>— Ananya Reddy</h4>
+    </div>
+    <div class="testimonial">
+      <p>"I've been a loyal customer for 3 years. The quality, authenticity, and attention to detail is simply phenomenal."</p>
+      <h4>— Meera Kapoor</h4>
+    </div>
+  </div>
+  <div class="dots">
+    <span class="dot active" data-index="0"></span>
+    <span class="dot" data-index="1"></span>
+    <span class="dot" data-index="2"></span>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter reveal" id="contact">
+  <h2 class="section-title">Join the Jiya Family</h2>
+  <p class="section-subtitle">Get 10% off your first order + exclusive previews</p>
+  <form id="newsForm">
+    <input type="email" id="emailInput" placeholder="Enter your email" required>
+    <button type="submit">Subscribe</button>
+  </form>
+  <p id="formMsg"></p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h4>Jiya Collection</h4>
+      <p>Where tradition meets timeless elegance. Handcrafted luxury for the modern queen.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <a href="#home">Home</a>
+      <a href="#collections">Collections</a>
+      <a href="#products">Shop</a>
+      <a href="#about">About Us</a>
+    </div>
+    <div>
+      <h4>Support</h4>
+      <a href="#">Shipping Info</a>
+      <a href="#">Returns</a>
+      <a href="#">Size Guide</a>
+      <a href="#">FAQ</a>
+    </div>
+    <div>
+      <h4>Follow Us</h4>
+      <div class="socials">
+        <a href="#">f</a>
+        <a href="#">📷</a>
+        <a href="#">🐦</a>
+        <a href="#">in</a>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">© 2026 Jiya Collection. All rights reserved. Crafted with ❤️ in India.</div>
+</footer>
+
+<script>
+/* ---------- MOBILE MENU ---------- */
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+document.querySelectorAll('.nav-links a').forEach(link =>
+  link.addEventListener('click', () => navLinks.classList.remove('open'))
+);
+
+/* ---------- NAVBAR SCROLL EFFECT ---------- */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+/* ---------- SCROLL REVEAL ---------- */
+const reveals = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.15 });
+reveals.forEach(el => revealObserver.observe(el));
+
+/* ---------- PRODUCT FILTER ---------- */
+const filterBtns = document.querySelectorAll('.filter-btn');
+const products = document.querySelectorAll('.product-card');
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    products.forEach(p => {
+      p.style.display = (filter === 'all' || p.dataset.category === filter) ? 'block' : 'none';
+    });
+  });
+});
+
+/* ---------- TESTIMONIAL SLIDER ---------- */
+const testimonials = document.querySelectorAll('.testimonial');
+const dots = document.querySelectorAll('.dot');
+let currentSlide = 0;
+function showSlide(i) {
+  testimonials.forEach(t => t.classList.remove('active'));
+  dots.forEach(d => d.classList.remove('active'));
+  testimonials[i].classList.add('active');
+  dots[i].classList.add('active');
+  currentSlide = i;
+}
+dots.forEach(dot => dot.addEventListener('click', () => showSlide(+dot.dataset.index)));
+setInterval(() => showSlide((currentSlide + 1) % testimonials.length), 5000);
+
+/* ---------- NEWSLETTER FORM ---------- */
+const newsForm = document.getElementById('newsForm');
+const formMsg = document.getElementById('formMsg');
+newsForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const email = document.getElementById('emailInput').value;
+  if (email.includes('@')) {
+    formMsg.textContent = `✨ Thank you! ${email} has been subscribed.`;
+    formMsg.style.color = 'var(--maroon)';
+    newsForm.reset();
+  } else {
+    formMsg.textContent = '⚠️ Please enter a valid email.';
+    formMsg.style.color = 'red';
+  }
+});
+
+/* ---------- ADD TO CART FEEDBACK ---------- */
+document.querySelectorAll('.product-info button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const original = btn.textContent;
+    btn.textContent = '✓ Added!';
+    btn.style.background = 'var(--gold)';
+    btn.style.color = 'var(--maroon)';
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.style.background = '';
+      btn.style.color = '';
+    }, 1500);
+  });
+});
+</script>
+</body>
+</html>
